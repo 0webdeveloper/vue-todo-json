@@ -2,23 +2,24 @@
     <div>
         <ul>
            <TodoItem
-           v-for="todo in todos"
+           v-for="(todo,i) in todos"
            :key="todo.title"
-           :items="todo"/>
+           :index="i"
+           :items="todo"
+            />
         </ul>
     </div>
 </template>
 
 <script>
 import TodoItem from "@/components/TodoItem";
-import {eventBus} from "../main";
 
 export default {
 
   props: ['todos'],
   components: {
     TodoItem
-  }
+  },
 }
 </script>
 

@@ -2,7 +2,7 @@
   <div>
     <li>
       <div :class="{done: checkbox}">
-        <strong>{{items.id}}</strong>
+        <strong>{{index + 1}}</strong>
         <input type="checkbox" v-model="checkbox"/>
         <span>{{items.title}}</span>
       </div>
@@ -18,13 +18,12 @@ export default {
   data() {
     return {
       checkbox: false,
-      id: ''
     }
   },
-  props: ['items'],
+  props: ['items', 'index'],
   methods: {
     removeTodo(id) {
-      eventBus.$emit('remTodo', this.item)
+      eventBus.$emit('remTodo', this.items.id)
     }
   }
 }
@@ -34,11 +33,24 @@ export default {
 li{
   display: flex;
   align-items: center;
-  border: 1px solid rgba(199, 194, 194, 0.78);
-  padding: 8px;
+  padding: 15px;
   margin-bottom: 18px;
   border-radius: 5px;
-  box-shadow: 1px 5px 7px #dfdfdf;
+  box-shadow: 1px 5px 15px #dfdfdf;
+}
+li > div{
+  display: flex;
+  align-items: center;
+}
+li > div > * {
+  margin-right: 10px;
+}
+input[type="checkbox"] {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
 }
 span{
   text-align: left;
