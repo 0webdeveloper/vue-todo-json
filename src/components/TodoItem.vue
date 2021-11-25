@@ -2,9 +2,9 @@
   <div>
     <li>
       <div :class="{done: items.completed}">
-        <strong>{{index + 1}}</strong>
+        <strong>{{ index + 1 }}</strong>
         <input type="checkbox" v-model="items.completed"/>
-        <span>{{items.title}}</span>
+        <span>{{ items.title }}</span>
       </div>
       <button class="btn" @click="removeTodo">&times;</button>
     </li>
@@ -16,9 +16,7 @@ import {eventBus} from "../main";
 
 export default {
   data() {
-    return {
-      // checkbox: false,
-    }
+    return {}
   },
   props: ['items', 'index'],
   methods: {
@@ -33,7 +31,7 @@ export default {
 </script>
 
 <style scoped>
-li{
+li {
   display: flex;
   align-items: center;
   padding: 15px;
@@ -41,13 +39,16 @@ li{
   border-radius: 5px;
   box-shadow: 1px 5px 15px #dfdfdf;
 }
-li > div{
+
+li > div {
   display: flex;
   align-items: center;
 }
+
 li > div > * {
   margin-right: 10px;
 }
+
 input[type="checkbox"] {
   display: inline-block;
   width: 20px;
@@ -55,9 +56,11 @@ input[type="checkbox"] {
   border: 1px solid #dfdfdf;
   border-radius: 5px;
 }
-span{
+
+span {
   text-align: left;
 }
+
 .btn {
   display: block;
   width: 30px;
@@ -70,7 +73,9 @@ span{
   cursor: pointer;
   margin-left: auto;
 }
+
 .done {
   text-decoration: line-through;
+  color: #cc0000;
 }
 </style>

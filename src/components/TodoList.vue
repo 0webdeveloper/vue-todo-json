@@ -1,14 +1,14 @@
 <template>
-    <div>
-        <ul>
-           <TodoItem
-           v-for="(todo,i) in todos"
-           :key="todo.title"
-           :index="i"
-           :items="todo"
-            />
-        </ul>
-    </div>
+  <div>
+    <ul>
+      <TodoItem
+          v-for="(todo,i) in todos"
+          :key="todo.title"
+          :index="i"
+          :items="todo"
+      />
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -24,9 +24,9 @@ export default {
 </script>
 
 <style scoped>
-    ul {
-        margin: 10px auto;
-        list-style: none;
-        padding: 0;
-    }
+ul {
+  margin: 10px auto;
+  list-style: none;
+  padding: 0;
+}
 </style>
