@@ -5,10 +5,11 @@
     <hr>
     <div class="counter-todo">
       <span>number of todos</span>
-      <b class="counter-todo_numer">{{ count }}</b>
+      <b class="counter-todo_numer">{{ count }} </b>
+      <span> / {{ completed }} (done)</span>
     </div>
-      <TodoList :todos="arrTodos"
- />
+      <AddForm />
+      <TodoList :todos="arrTodos" />
 
   </div>
   </div>
@@ -16,13 +17,15 @@
 
 <script>
 import TodoList from "@/components/TodoList";
+import AddForm from "@/components/AddForm";
 import {eventBus} from "./main";
 
 export default {
   data() {
     return {
       arrTodos:[],
-      count: 0
+      count: 0,
+      completed: 0
     }
   },
   mounted(){
@@ -35,12 +38,24 @@ export default {
   },
   created() {
     eventBus.$on('remTodo', data => {
-     this.arrTodos = this.arrTodos.filter((t) => t.id !== data);
+     this.arrTodos = this.arrTodos.filter((array) => array.id !== data.id);
      this.count = this.arrTodos.length;
+     this.completed = this.checkCompleted();
     });
   },
+  methods: {
+    checkCompleted() {
+      let sum = 0;
+      this.arrTodos.forEach(item => {
+          if(item.completed === true) {
+            sum += 1
+          }
+      });
+      return sum;
+    }
+  },
   components: {
-    TodoList
+    TodoList, AddForm
   }
 }
 </script>

@@ -1,9 +1,9 @@
 <template>
   <div>
     <li>
-      <div :class="{done: checkbox}">
+      <div :class="{done: items.completed}">
         <strong>{{index + 1}}</strong>
-        <input type="checkbox" v-model="checkbox"/>
+        <input type="checkbox" v-model="items.completed"/>
         <span>{{items.title}}</span>
       </div>
       <button class="btn" @click="removeTodo">&times;</button>
@@ -17,13 +17,16 @@ import {eventBus} from "../main";
 export default {
   data() {
     return {
-      checkbox: false,
+      // checkbox: false,
     }
   },
   props: ['items', 'index'],
   methods: {
     removeTodo(id) {
-      eventBus.$emit('remTodo', this.items.id)
+      eventBus.$emit('remTodo', {
+        id: this.items.id,
+        completed: this.items.completed
+      })
     }
   }
 }
