@@ -6,7 +6,7 @@
     <div class="counter-todo">
       <span>number of todos</span>
       <b class="counter-todo_numer">{{ count }} </b>
-      <span> / {{ completed }} (done)</span>
+      <span> / {{ checkCompleted() }} (done)</span>
     </div>
       <AddForm />
       <TodoList :todos="arrTodos" />
@@ -25,11 +25,10 @@ export default {
     return {
       arrTodos:[],
       count: 0,
-      completed: 0
     }
   },
   mounted(){
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
       .then(response => response.json())
           .then(json => {
             this.arrTodos = json;
