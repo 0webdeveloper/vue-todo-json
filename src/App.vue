@@ -3,7 +3,7 @@
     <div class="container">
       <h1>Todolist components</h1>
       <CounterTodo :arrTodos="arrTodos"/>
-      <AddForm/>
+      <AddForm @add-todo="addTodo"/>
       <TodoList :todos="arrTodos"/>
     </div>
   </div>
@@ -22,7 +22,7 @@ export default {
     }
   },
   mounted() {
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=7')
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=3')
         .then(response => response.json())
         .then(json => {
           this.arrTodos = json;
@@ -32,6 +32,11 @@ export default {
     eventBus.$on('remTodo', data => {
       this.arrTodos = this.arrTodos.filter((array) => array.id !== data.id);
     });
+  },
+  methods: {
+    addTodo(data) {
+      this.arrTodos.push(data)
+    }
   },
   components: {
     CounterTodo,

@@ -14,13 +14,15 @@ export default {
   },
   methods: {
     addTodo() {
-      const newTodo = {
-        id: Date.now(),
-        title: this.title,
-        completed: false
+      if(this.title.trim) {
+        const newTodo = {
+          id: Date.now(),
+          title: this.title,
+          completed: false
+        }
+        this.$emit('add-todo', newTodo);
+        this.title = '';
       }
-      this.$emit('add-todo', newTodo);
-      this.title = '';
     }
   }
 }
@@ -37,6 +39,11 @@ export default {
   width: 100%;
   border: 1px solid #d4d4d4;
   border-radius: 5px;
+  outline: none;
+}
+.todo-form_input:focus{
+  transition: all .3s ease-in-out;
+  background: #f1f1f1;
 }
 .todo-form_button {
   display: inline-block;
@@ -50,6 +57,7 @@ export default {
   transition: background .2s ease-in-out;
   text-transform: uppercase;
   cursor: pointer;
+  outline: none;
 }
 .todo-form_button:hover {
   background-color: #b38404;
