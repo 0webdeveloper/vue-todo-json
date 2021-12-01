@@ -35,10 +35,11 @@ export default {
   margin: 20px auto;
 }
 
-.counter-todo_number{
-  color: #cc0000;
+.counter-todo_number {
+  color: #7fff00;
 }
-.counter-todo_completed{
+
+.counter-todo_completed {
   display: block;
   margin: 10px auto;
 }

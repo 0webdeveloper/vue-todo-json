@@ -1,55 +1,30 @@
 <template>
   <div id="app">
+    <Header/>
     <div class="container">
-      <h1>Todolist components</h1>
-      <CounterTodo :arrTodos="arrTodos"/>
-      <AddForm @add-todo="addTodo"/>
-      <TodoList :todos="arrTodos"/>
+      <router-view/>
     </div>
   </div>
 </template>
-
 <script>
-import TodoList from "@/components/TodoList";
-import AddForm from "@/components/AddForm";
-import {eventBus} from "./main";
-import CounterTodo from "./components/CounterTodo";
+import Header from '@/components/Header';
 
 export default {
-  data() {
-    return {
-      arrTodos: [],
-    }
-  },
-  mounted() {
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=3')
-        .then(response => response.json())
-        .then(json => {
-          this.arrTodos = json;
-        });
-  },
-  created() {
-    eventBus.$on('remTodo', data => {
-      this.arrTodos = this.arrTodos.filter((array) => array.id !== data.id);
-    });
-  },
-  methods: {
-    addTodo(data) {
-      this.arrTodos.push(data)
-    }
-  },
   components: {
-    CounterTodo,
-    TodoList, AddForm
+    Header
   }
 }
 </script>
-
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body, html {
+  color: #fff;
+  background-color: #2c3e50;
 }
 
 #app {
@@ -58,8 +33,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #fff;
 }
 
 .container {

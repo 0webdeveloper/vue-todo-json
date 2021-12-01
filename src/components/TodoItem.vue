@@ -2,9 +2,9 @@
   <div>
     <li>
       <div :class="{done: items.completed}">
-        <strong>{{ index + 1 }}</strong>
         <input type="checkbox" v-model="items.completed"/>
-        <span>{{ items.title }}</span>
+        <strong>{{ index + 1 | startZero}}</strong>
+        <span>{{ items.title | upperCase}}</span>
       </div>
       <button class="btn" @click="removeTodo">&times;</button>
     </li>
@@ -26,27 +26,39 @@ export default {
         completed: this.items.completed
       })
     }
+  },
+  filters: {
+    upperCase(value) {
+    return value.toUpperCase();
+    },
+    startZero(id) {
+      if(id < 10) {
+        id = '0' + id
+      }
+      return id;
+    }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 li {
   display: flex;
   align-items: center;
   padding: 15px;
   margin-bottom: 18px;
   border-radius: 5px;
-  box-shadow: 1px 5px 15px #dfdfdf;
-}
+  background-color: #fff;
+  color: #2c3e50;
 
-li > div {
-  display: flex;
-  align-items: center;
-}
+  & > div {
+    display: flex;
+    align-items: center;
 
-li > div > * {
-  margin-right: 10px;
+    & > * {
+      margin-right: 10px;
+    }
+  }
 }
 
 input[type="checkbox"] {
@@ -69,7 +81,7 @@ span {
   border: none;
   color: #fff;
   font-size: 1.2em;
-  background: #ca9aff;
+  background: #CC92C2;
   cursor: pointer;
   margin-left: auto;
 }

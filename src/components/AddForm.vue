@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     addTodo() {
-      if(this.title.trim) {
+      if(this.title.trim()) {
         const newTodo = {
           id: Date.now(),
           title: this.title,
@@ -51,7 +51,7 @@ export default {
   border-radius: 5px;
   border: none;
   color: #fff;
-  background-color: goldenrod;
+  background-color: #531CB3;
   width:10%;
   margin-left: 15px;
   transition: background .2s ease-in-out;
@@ -60,6 +60,6 @@ export default {
   outline: none;
 }
 .todo-form_button:hover {
-  background-color: #b38404;
+  background-color: #3c108b;
 }
 </style>
