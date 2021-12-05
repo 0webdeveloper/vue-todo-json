@@ -1,7 +1,12 @@
 <template>
   <div>
     <h2>Todolist components</h2>
-    <CounterTodo :arrTodos="arrTodos"/>
+
+    <div class="counter-todo">
+      <span>number of todos <b class="counter-todo_number">{{ quantity }} </b></span>
+      <span class="counter-todo_completed">{{ checkCompleted }} (done)</span>
+    </div>
+
     <AddForm @add-todo="addTodo"/>
 
     <p class="filter-title">Todo filter</p>
@@ -21,17 +26,19 @@
 import TodoList from "@/components/TodoList";
 import AddForm from "@/components/AddForm";
 import {eventBus} from "@/main";
-import CounterTodo from "@/components/CounterTodo";
 import Loader from "@/components/PreLoader";
 
 
 export default {
   data() {
     return {
-      arrTodos: [],
+      arrTodos: [
+
+      ],
       loading: true,
       select: ['all', 'completed', 'active'],
-      filter: 'all'
+      filter: 'all',
+      count: null,
     }
   },
   mounted() {
@@ -44,7 +51,6 @@ export default {
   },
   computed: {
     filterTodos() {
-      console.log(this.filter)
       if (this.filter === 'all') {
         return this.arrTodos;
       }
@@ -54,6 +60,18 @@ export default {
       if (this.filter === 'active') {
         return this.arrTodos.filter(item => !item.completed);
       }
+    },
+    checkCompleted() {
+      let sum = 0;
+      this.arrTodos.forEach(item => {
+        if (item.completed) {
+          sum++
+        }
+      });
+      return sum;
+    },
+    quantity() {
+      return this.arrTodos.length;
     }
   },
   created() {
@@ -67,7 +85,7 @@ export default {
     }
   },
   components: {
-    CounterTodo, TodoList, AddForm, Loader
+    TodoList, AddForm, Loader
   }
 }
 </script>
@@ -99,6 +117,19 @@ export default {
   background-repeat: no-repeat, repeat;
   background-position: right .7em top 50%, 0 0;
   background-size: .65em auto, 100%;
+}
+
+.counter-todo {
+  margin: 20px auto;
+}
+
+.counter-todo_number {
+  color: #7fff00;
+}
+
+.counter-todo_completed {
+  display: block;
+  margin: 10px auto;
 }
 
 </style>
